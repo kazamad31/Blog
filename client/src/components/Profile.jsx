@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const Profile = () => {
   const navigate=useNavigate();
@@ -40,7 +41,12 @@ navigate("/login");
   };
   const fileUpload= async(e)=>{
     try{
+
     e.preventDefault();
+  const image= files.name.substring(files.name.lastIndexOf('.')+1).toLowerCase();
+  
+  if (image==='jpg' || image==='png' || image==='jpeg'){
+    
   const formData =new FormData();
   formData.append("file", files);
   formData.append("fileName", files.name);
@@ -51,8 +57,12 @@ navigate("/login");
     withCredentials: true
   };
   const sendFile= await axios.post('/api/profile/file-upload', formData, config);
-  const fileStatus= ()=> notify(sendFile.data.message);
-  fileStatus();
+  (()=> notify(sendFile.data.message))();
+  }
+  else {
+    (()=>notify("Please select valid file type"))();
+  }
+  
  }
  catch(error)
  {
@@ -62,15 +72,24 @@ navigate("/login");
 const dp= userData?.profile?.avtar;
 const img= (dp!==undefined)? `http://localhost:5000/${userData?.profile?.avtar}` : "http://localhost:5000/profile_pic.jpg" ;
 const proUpdate =async()=>{
-  const res = await axios.post('/api/profile/profile-update', updatedUser, {withCredentials:true});
-  (()=>notify(res.data.message))();
+  if (!updatedUser?.profile?.profession && !updatedUser?.profile?.phone && !updatedUser?.profile?.address){
+    (()=>notify("Please fill the details first"))();
+  }
+  else{
+    const res = await axios.post('/api/profile/profile-update', updatedUser, {withCredentials:true});
+    (()=>notify(res.data.message))();
+  }
+  
+  
 }
 
 useEffect(() => {
 tokenCheck();
 }, []);
   return (
-    <div>
+    <div className="mybody">
+      <Header info={userData}/> 
+      <div>
         <div className="container">
           <div className="main-body">
             <div className="row gutters-sm">
@@ -145,7 +164,7 @@ tokenCheck();
                         <label htmlFor="profession">Profession</label>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input type ="text" id="profession" name="profession" defaultValue={userData?.profile?.profession} onChange={handleChange}/>
+                        <input type ="text" id="profession" name="profession" required defaultValue={userData?.profile?.profession} onChange={handleChange}/>
                       </div>
                     </div>
                     <hr />
@@ -154,7 +173,7 @@ tokenCheck();
                         <label htmlFor="mob">Mobile</label>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input type="tel" id="phone" name="phone" defaultValue={userData?.profile?.phone}  onChange={handleChange}/>
+                        <input type="tel" id="phone" name="phone" required defaultValue={userData?.profile?.phone}  onChange={handleChange}/>
                       </div>
                     </div>
                     <hr />
@@ -163,7 +182,7 @@ tokenCheck();
                        <label htmlFor="address">Address</label>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input type="text" id="address" name="address" defaultValue={userData?.profile?.address} onChange={handleChange}/>
+                        <input type="text" id="address" name="address" required defaultValue={userData?.profile?.address} onChange={handleChange}/>
                       </div>
                     </div>
                     <hr />
@@ -234,7 +253,9 @@ tokenCheck();
             </div>
           </div>
         </div>
+        </div>
         <ToastContainer/>
+      
       </div>
   )
 }

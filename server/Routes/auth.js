@@ -77,6 +77,7 @@ router.post('/api/register',async (req, res)=>{
                      router.get('/api/about',authenticate, (req, res)=>
                      {
                         console.log(`Hello this is my about`);
+                        res.status(200).json(req.rootUser);
                         
                      });
                      router.get('/api/profile',authenticate, (req, res)=>{

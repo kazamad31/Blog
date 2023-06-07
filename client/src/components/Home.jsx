@@ -105,7 +105,7 @@ tokenCheck();
 </header>
 
 
-<div className="counter">
+{/*<div className="counter">
     <div className="container">
         <div className="row">
             <div className="col-lg-12">
@@ -133,7 +133,7 @@ tokenCheck();
             </div>
         </div>
     </div>
-</div>
+  </div>*/}
 
 
 <div id="introduction" className="basic-1 bg-gray">
