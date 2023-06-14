@@ -70,7 +70,7 @@ navigate("/login");
  }
 }
 const dp= userData?.profile?.avtar;
-const img= (dp!==undefined)? `http://localhost:5000/${userData?.profile?.avtar}` : "http://localhost:5000/profile_pic.jpg" ;
+const img= (dp!==undefined)? `https://mernappbymanish.onrender.com/${userData?.profile?.avtar}` : "https://mernappbymanish.onrender.com/profile_pic.jpg" ;
 const proUpdate =async()=>{
   if (!updatedUser?.profile?.profession && !updatedUser?.profile?.phone && !updatedUser?.profile?.address){
     (()=>notify("Please fill the details first"))();
