@@ -2,9 +2,10 @@ import  express, { application }  from 'express';
 import User from '../Model/userSchema.js'
 import jwt from 'jsonwebtoken';
 import authenticate from '../Middleware/authentication.js';
-//import upload from '../Multer/multer.js'
 import multer, { diskStorage } from 'multer';
 import axios from 'axios';
+import dotenv from 'dotenv';
+const key=process.env.API_KEY;
 
 
 const router = express.Router();
@@ -140,7 +141,7 @@ router.post('/api/register',async (req, res)=>{
                                         },
                                         headers: {
                                           'X-BingApis-SDK': 'true',
-                                          'X-RapidAPI-Key': '13f37a2c0dmshfe82409dc673924p13fa96jsn0a3a6f8c8190',
+                                          'X-RapidAPI-Key': `${key}`,
                                           'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
                                         }
                                     }

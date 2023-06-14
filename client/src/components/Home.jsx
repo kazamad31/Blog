@@ -183,57 +183,6 @@ tokenCheck();
     </div> 
 </div> 
 
-
-
-
-<div className="slider-1 bg-gray">
-    <img className="quotes-decoration" src="images/quotes.svg" alt="alternative"/>
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-12">
-
-            
-                <div className="slider-container">
-                    <div className="swiper-container card-slider">
-                        <div className="swiper-wrapper">
-                            
-
-                            <div className="swiper-slide">
-                                <img className="testimonial-image" src="images/testimonial-1.jpg" alt="alternative"/>
-                                <p className="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div className="testimonial-author">Marlene Visconte</div>
-                                <div className="testimonial-position">General Manager - Scouter</div>
-                            </div>
-    
-                            <div className="swiper-slide">
-                                <img className="testimonial-image" src="images/testimonial-2.jpg" alt="alternative"/>
-                                <p className="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div className="testimonial-author">John Spiker</div>
-                                <div className="testimonial-position">Team Leader - Vanquish</div>
-                            </div>
-                            
-    
-                           
-                            <div className="swiper-slide">
-                                <img className="testimonial-image" src="images/testimonial-3.jpg" alt="alternative"/>
-                                <p className="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>
-                                <div className="testimonial-author">Stella Virtuoso</div>
-                                <div className="testimonial-position">Design Chief - Bikegirl</div>
-                            </div>
-                            
-    
-                        </div>
-                        <div className="swiper-button-next"></div>
-                        <div className="swiper-button-prev"></div>
-                        
-                    </div>
-                </div> 
-
-            </div> 
-        </div> 
-    </div> 
-</div> 
-
 <div id="contact" className="form-1">
     <img className="decoration-star" src="images/decoration-star.svg" alt="alternative"/>
     <img className="decoration-star-2" src="images/decoration-star.svg" alt="alternative"/>

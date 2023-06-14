@@ -27,7 +27,7 @@ const Header = (props) => {
                     <a className="nav-link" href="/news">News</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/about">About</a>
+                    <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" role="button" href="/#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{props.info.name}</a>

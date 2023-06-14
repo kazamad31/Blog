@@ -9,6 +9,7 @@ import authenticate from './Middleware/authentication.js';
 
 
 
+
 const app= express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -21,7 +22,7 @@ app.use(router);
 app.use(express.static('uploads'));
 app.use(authenticate);
 dotenv.config({path:'./config.env'});
-const PORT= process.env.PORT;
+const PORT= process.env.PORT || 5000;
 
 app.get('/', (req, res)=>{
     res.send("Hello world from the server")
