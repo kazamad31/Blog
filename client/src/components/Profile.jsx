@@ -23,12 +23,12 @@ const Profile = () => {
   const tokenCheck = async()=> {
     try{
     const res= await axios.get('/api/profile', {withCredentials: true});
-   // console.log(res.data);
-    setUserData(res.data);
-    
     if(!res.status===200)
     {
         navigate("/login");
+    }
+    else{
+    setUserData(res.data.userInfo);
     }
     }   
 catch (err){
@@ -98,17 +98,23 @@ tokenCheck();
                   <div className="card-body">
                     <div className="d-flex flex-column align-items-center text-center">
                       <img src= {img} alt="Admin" className="rounded-circle" width={150} />
-                      <div className="file-upload">
-                       <label for="file"> <i className="fa fa-camera upload-button"></i></label>
+                     { /*<div className="file-upload">
+                       <label htmlFor="file"> <i className="fa fa-camera upload-button"></i></label>
                       <input type="file" id ="file" className="avtar" name="avtar" onChange={myFile} accept="image/png image/jpeg"/>
                       <button type="submit" className="pro-button" onClick={fileUpload}>Update</button> 
-                       </div>
+                      </div>*/}
                       <div className="mt-3">
+                      <div className="file-upload">
+                       <label htmlFor="file"> <i className="fa fa-camera upload-button"></i></label>
+                      <input type="file" id ="file" className="avtar" name="avtar" onChange={myFile} accept="image/png image/jpeg"/>
+                      <button type="submit" className="pro-button" onClick={fileUpload}>Update</button> 
+                      </div>
                         <h4>{userData.name}</h4>
                         <p className="text-secondary mb-1">{userData?.profile?.profession}</p>
                         <p className="text-muted font-size-sm">{userData?.profile?.address}</p>
                         <button className="btn btn-primary">Follow</button>
                         <button className="btn btn-outline-primary">Message</button>
+                        
                       </div>
                     </div>
                   </div>
@@ -187,7 +193,7 @@ tokenCheck();
                     </div>
                     <hr />
                     <div className="row">
-                      <div className="col-sm-12">
+                      <div style={{display:'flex', justifyContent:'center'}} className="col-sm-12">
                         <button type="submit" onClick={proUpdate}>Update</button>
                       </div>
                     </div>

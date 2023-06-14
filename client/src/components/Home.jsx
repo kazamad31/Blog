@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Header from './Header';
 
 
 const Home = () => {
@@ -14,19 +15,19 @@ const Home = () => {
     const tokenCheck = async()=> {
         try{
         const res= await axios.get('/api/home', {withCredentials: true});
-        //console.log(res.data);
-        setUserData(res.data);
         if(!res.status===200)
         {
             navigate("/login");
         }
-
+        else{
+        setUserData(res.data.userInfo);
+        }
         }   
     catch (err){
-console.log(err);
-navigate("/login");
+    console.log(err);
+    navigate("/login");
     }
-}
+    }
 useEffect(() => {
 tokenCheck();
 }, []);
@@ -34,54 +35,7 @@ tokenCheck();
 
   return (
     <div> 
-      <nav id="navbar" className="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-    <div className="container">
-
-
-        <a className="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"/></a> 
-
-       
-       {/*<a className="navbar-brand logo-text" href="index.html">Yavin</a>*/}
-
-        <button className="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul className="navbar-nav ms-auto navbar-nav-scroll">
-                <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/home">Home</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#details">Details</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#services">Services</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="/about">About</a>
-                </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" role="button" href="/#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{userData.name}</a>
-                    <ul className="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a className="dropdown-item" href="/profile">Profile</a></li>
-                        <li><div className="dropdown-divider"></div></li>
-                        <li><a className="dropdown-item" href="terms.html">Help & Support</a></li>
-                        <li><div className="dropdown-divider"></div></li>
-                        <li><a className="dropdown-item"  href="/logout">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <span className="nav-item">
-                <a className="btn-outline-sm" href="#contact">Contact us</a>
-            </span>
-        </div>
-    </div>
-</nav>
-
-
-  
-
+        <Header info ={userData}/>
 <header id="header" className="header">
     <img className="decoration-star" src="images/decoration-star.svg" alt="alternative"/>
     <img className="decoration-star-2" src="images/decoration-star.svg" alt="alternative"/>
@@ -103,38 +57,6 @@ tokenCheck();
         </div>
     </div>
 </header>
-
-
-{/*<div className="counter">
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-12">
-                
-            
-                <div className="counter-container">
-                    <div className="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="231" data-purecounter-duration="3" className="purecounter">1</div>
-                        <div className="counter-info">Happy Customers</div>
-                    </div>
-                    <div className="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="385" data-purecounter-duration="1.5" className="purecounter">1</div>
-                        <div className="counter-info">Issues Solved</div>
-                    </div>
-                    <div className="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="159" data-purecounter-duration="3" className="purecounter">1</div>
-                        <div className="counter-info">Good Reviews</div>
-                    </div>
-                    <div className="counter-cell">
-                        <div data-purecounter-start="0" data-purecounter-end="128" data-purecounter-duration="3" className="purecounter">1</div>
-                        <div className="counter-info">Case Studies</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-  </div>*/}
-
 
 <div id="introduction" className="basic-1 bg-gray">
     <div className="container">
@@ -185,144 +107,6 @@ tokenCheck();
         </div> 
     </div> 
 </div> 
-
-<div id="services" className="cards-1 bg-gray">
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-5">
-                <div className="text-container">
-                    <h2>Services that we offer</h2>
-                    <p>Greatly hearted has who believe. Drift allow green son walls years for blush. Sir margaret drawings repeated recurred exercise laughing may you</p>
-                    <p>Do repeated whatever to welcomed absolute no. Fat surprise although more words outlived</p>
-                    <ul className="list-unstyled li-space-lg">
-                        <li className="d-flex">
-                            <i className="fas fa-square"></i>
-                            <div className="flex-grow-1">And informed shy dissuade property. Musical by</div>
-                        </li>
-                        <li className="d-flex">
-                            <i className="fas fa-square"></i>
-                            <div className="flex-grow-1">He drawing savings an. No we stand avoid</div>
-                        </li>
-                        <li className="d-flex">
-                            <i className="fas fa-square"></i>
-                            <div className="flex-grow-1">Announcing of invita mrore wo tion principle</div>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
-            <div className="col-lg-7">
-                <div className="card-container">
-
-                
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="fas fa-rocket"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Space analysis and planning</h5>
-                        </div>
-                    </div>
-
-                    
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="far fa-clock"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Design and color choosing</h5>
-                        </div>
-                    </div>
-                   
-
-                    
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="far fa-comments"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Materials and delivery</h5>
-                        </div>
-                    </div>
-                    
-
-                    
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="fas fa-tools"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Execute the concept</h5>
-                        </div>
-                    </div>
-                    
-
-                    
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="fas fa-chart-pie"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Creating great atmosphere</h5>
-                        </div>
-                    </div>
-                   
-
-                   
-                    <div className="card">
-                        <div className="card-icon">
-                            <span className="far fa-chart-bar"></span>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title">Evaluation and reporting</h5>
-                        </div>
-                    </div>
-                    
-
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-</div> 
-
-
-
-
-<div className="basic-3">
-    <img className="decoration-star" src="images/decoration-star.svg" alt="alternative"/>
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-6 col-xl-7">
-                <div className="text-container">
-                    <h2>A beautiful and well organized office space increases productivity</h2>
-                    <p>On it differed repeated wandered required in. Then girl neat why yet knew rose spot. Moreover property we he kindness greatest be oh striking laughter. In me he at collecting affronting principles apartments. Has visitor law attacks pretend you calling own excited painted. Contented attending</p>
-                    <a className="btn-solid-reg" href="article.html">Get started</a>
-                </div> 
-            </div> 
-            <div className="col-lg-6 col-xl-5">
-                <div className="image-container">
-                    <img className="img-fluid" src="images/details-2.png" alt="alternative"/>
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-</div> 
-
-
-
-
-<div className="basic-4 bg-gray">
-    <div className="container">
-        <div className="row">
-            <div className="col-lg-12">
-                <h4>Our team of highly skilled designers and interior construction workers can deliver above your level of expections</h4>
-                <a className="btn-solid-lg" href="#contact">Get quote</a>
-            </div> 
-        </div> 
-    </div> 
-</div>
-
-
-
 
 <div id="projects" className="cards-2">
     <div className="container">
@@ -541,15 +325,8 @@ tokenCheck();
     <div className="container">
         <div className="row">
             <div className="col-lg-12">
-                <p className="p-small">Copyright © <a href="#your-link">Your name</a></p>
+                <p className="p-small">Copyright © <a href="#your-link">{userData.name}</a></p>
             </div>
-        </div>
-
-        <div className="row">
-            <div className="col-lg-12">
-                <p className="p-small">Distributed By <a href="https://themewagon.com/">Themewagon</a></p>
-            </div>
-       
         </div>
     </div>  
 </div>

@@ -18,9 +18,9 @@ const [user, setUser]= useState({
         console.log(e.target);
        setUser({...user,[name]:value});
        }
-       const tokenCheck = async()=> {
+    const tokenCheck = async()=> {
         try{
-        const res= await axios.get('/api/home', {withCredentials: true});
+        const res= await axios.get('/api/token_check', {withCredentials: true});
         if(res.status===200)
         {
             navigate("/home");

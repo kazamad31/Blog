@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import authenticate from '../Middleware/authentication.js';
 //import upload from '../Multer/multer.js'
 import multer, { diskStorage } from 'multer';
+import axios from 'axios';
 
 
 const router = express.Router();
@@ -70,18 +71,22 @@ router.post('/api/register',async (req, res)=>{
                      }
 
                      });
+                     router.get('/api/token_check', authenticate, (req, res)=>{
+                        console.log("this is token check");
+                        res.status(200).json({userInfo:req.rootUser,message:"authorized"});
+                     });
                      router.get('/api/home',authenticate, (req, res)=>{
                         console.log(`Hello this is my home`);
-                         res.status(200).json(req.rootUser);
+                         res.status(200).json({userInfo:req.rootUser});
                      });
                      router.get('/api/about',authenticate, (req, res)=>
                      {
                         console.log(`Hello this is my about`);
-                        res.status(200).json(req.rootUser);
+                        res.status(200).json({userInfo:req.rootUser});
                         
                      });
                      router.get('/api/profile',authenticate, (req, res)=>{
-                       res.status(200).json(req.rootUser);
+                       res.status(200).json({userInfo:req.rootUser});
                      });
                      router.get('/logout', (req, res)=>
                      {
@@ -93,7 +98,6 @@ router.post('/api/register',async (req, res)=>{
                     try{
                         if(req.body!==null)
                         {
-                        //const fileinfo=req.file;
                         const fileName= req.body.fileName;
                         const myuser=req.rootUser;  
                         const updatedUser= await(User.findOneAndUpdate({_id:myuser._id},{$set:{'profile.avtar':fileName}},{new:true}));
@@ -117,6 +121,42 @@ router.post('/api/register',async (req, res)=>{
                                 const updatedUser = await(User.findOneAndUpdate({_id:myuser._id},{$set:{'profile.profession':userInfo.profile.profession, 'profile.phone':userInfo.profile.phone, 'profile.address':userInfo.profile.address}}, {new:true}));
                                 updatedUser.save();
                                 res.status(202).json({message:"User profile has been successfully updated"});
+                             });
+                             router.post('/api/news', authenticate, async(req, res)=>{
+
+                                try{
+                                   const {squery}=req.body;
+                                    const options = {
+                                        method: 'GET',
+                                        url: 'https://bing-news-search1.p.rapidapi.com/news/search',
+                                        params: {
+                                          q: `${squery}`,
+                                          freshness: 'Day',
+                                          textFormat: 'Raw',
+                                          safeSearch: 'Off',
+                                          originalImg: true,
+                                          count:12,
+                                          offset:0
+                                        },
+                                        headers: {
+                                          'X-BingApis-SDK': 'true',
+                                          'X-RapidAPI-Key': '13f37a2c0dmshfe82409dc673924p13fa96jsn0a3a6f8c8190',
+                                          'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+                                        }
+                                    }
+                                    const news= await axios.request(options);
+                                    const newsArticle =news.data.value;
+        
+                                    if(newsArticle.length!==12){
+                                       return res.status(401).json({message:"Invalid Request"});
+                                    }
+                                    else{
+                                       return res.status(200).json({query:newsArticle});
+                                    }
+                                }
+                                catch(error){
+                                  console.log(error);
+                                }
                              });
 
             

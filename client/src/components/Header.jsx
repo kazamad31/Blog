@@ -11,9 +11,6 @@ const Header = (props) => {
 
         <a className="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"/></a> 
 
-       
-       {/*<a className="navbar-brand logo-text" href="index.html">Yavin</a>*/}
-
         <button className="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
@@ -27,7 +24,7 @@ const Header = (props) => {
                     <a className="nav-link" href="#details">Details</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#services">Services</a>
+                    <a className="nav-link" href="/news">News</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="/about">About</a>

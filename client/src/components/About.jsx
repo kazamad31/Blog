@@ -9,20 +9,21 @@ const About = () => {
   const [userData, setUserData]= useState({});
   const navigate = useNavigate();
   const ary = ['mango', 'apple', 'banana', 'orange'];
-  const tokenCheck = async()=>{
-      try{
-      const res= await axios.get('/api/about', {withCredentials:true});
-      setUserData(res.data);
-      if(!res.status===200)
-      {
-          navigate("/login");
-      }
-
-      }   
-  catch (err){
+  const tokenCheck = async()=> {
+    try{
+    const res= await axios.get('/api/about', {withCredentials: true});
+    if(!res.status===200)
+    {
+        navigate("/login");
+    }
+    else{
+    setUserData(res.data.userInfo);
+    }
+    }   
+catch (err){
 console.log(err);
 navigate("/login");
-  }
+}
 }
 useEffect(() => {
 tokenCheck();
