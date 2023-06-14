@@ -1,8 +1,0 @@
-git init (for initilize)
-git status(for check status)
-git add .(for add all changes)
-git commit -m "message"(commit to staging area)
-git config --global user.email "you@example.com"
-git config --global user.name "youname"
-git remote add origin "your github repository address"
-git pust -u -f origin master
