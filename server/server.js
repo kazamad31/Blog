@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import DB from './db/connection.js';
 import userSchema from './Model/userSchema.js';
 import cookieParser from 'cookie-parser';

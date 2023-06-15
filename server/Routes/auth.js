@@ -1,5 +1,6 @@
 import  express, { application }  from 'express';
 import User from '../Model/userSchema.js'
+import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import authenticate from '../Middleware/authentication.js';
 import multer, { diskStorage } from 'multer';
