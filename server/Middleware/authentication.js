@@ -4,7 +4,7 @@ import User from '../Model/userSchema.js';
 
 const authenticate = async (req, res, next)=> {
     //console.log("this is working fine");
-    const token = req.cookies.jwttoken;
+    const token = await req.cookies.jwttoken;
    // console.log(`${token} what is this`);
     if(!token)
     {
