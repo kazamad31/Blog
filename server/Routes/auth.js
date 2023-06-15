@@ -72,7 +72,7 @@ router.post('/api/register',async (req, res)=>{
                      }
 
                      });
-                     router.post('/api/token_check', authenticate, (req, res)=>{
+                     router.get('/api/token_check', authenticate, (req, res)=>{
                         console.log("this is token check");
                         res.status(200).json({userInfo:req.rootUser,message:"authorized"});
                      });

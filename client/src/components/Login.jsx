@@ -21,7 +21,7 @@ const [user, setUser]= useState({
        }
     const tokenCheck = async()=> {
         try{
-        const res= await axios.post(`${BASE_URL}/api/token_check`, {withCredentials: true});
+        const res= await axios.get(`${BASE_URL}/api/token_check`, {withCredentials: true});
         if(res.status===200)
         {
             navigate("/home");

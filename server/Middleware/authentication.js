@@ -25,7 +25,7 @@ if(!rootUser)
 req.rootUser= rootUser;
 //console.log(req.rootUser);
  next();
-
+ 
     }
 catch(err){
     res.status(401).send('Unauthorized: No token provided');
