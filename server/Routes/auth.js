@@ -43,7 +43,7 @@ router.post('/api/register',async (req, res)=>{
                     res.status(500).json({message:"Failed to registered"});
                 }
             });
-            router.post('/api/login',async (req, res)=> {
+            router.post('/api/login',async(req, res)=> {
                 try{
                 
                     const {email,password} = req.body;
@@ -54,12 +54,11 @@ router.post('/api/register',async (req, res)=>{
                     else{
                         const userLogin= await (User.findOne({email:email}));
                         if(userLogin && userLogin.password === password)
-
                         {
                             const token= await userLogin.generateAuthToken();
                             //console.log(token);
                             res.cookie("jwttoken",token, {expires: new Date(Date.now() + 86400000), httpOnly:true});
-                          res.status(202).json({message:"User suceessfully login" });
+                          res.status(202).json({message:token});
                            }
                             
                         else{

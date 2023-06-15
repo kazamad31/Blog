@@ -3,14 +3,13 @@ import User from '../Model/userSchema.js';
 
 
 const authenticate = async (req, res, next)=> {
-    //console.log("this is working fine");
+    try{
     const token = await req.cookies.jwttoken;
-   // console.log(`${token} what is this`);
     if(!token)
     {
        return res.status(400).send({error:"There is no token"})
     }
-    try{
+    
    // res.json({token:token});
     const verifyToken = jwt.verify(token, process.env.SECRET);
     //console.log(verifyToken);
@@ -27,12 +26,6 @@ req.rootUser= rootUser;
 //console.log(req.rootUser);
  next();
 
-
-/*res.send(rootUser);
-req.token=token;
-req.rootUser=rootUser;
-req.userId=rootUser._id;*/
-//next();
     }
 catch(err){
     res.status(401).send('Unauthorized: No token provided');
