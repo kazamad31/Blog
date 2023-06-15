@@ -6,6 +6,7 @@ import { useEffect,useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
+const BASE_URL= process.env.REACT_APP_API_URL;
 const navigate = useNavigate();
 const notify=(message)=>toast(`${message}`);    
 const [login ,signUp]= useState("containers");
@@ -20,7 +21,7 @@ const [user, setUser]= useState({
        }
     const tokenCheck = async()=> {
         try{
-        const res= await axios.get('/api/token_check', {withCredentials: true});
+        const res= await axios.get(`${BASE_URL}/api/token_check`, {withCredentials: true});
         if(res.status===200)
         {
             navigate("/home");
@@ -43,13 +44,13 @@ const [user, setUser]= useState({
        }
        const registerData = async(e)=>{
         e.preventDefault();
-        const res= await axios.post('/api/register', user);
+        const res= await axios.post(`${BASE_URL}/api/register`, user);
         const resdataResponse =()=> notify(res.data.message);
         resdataResponse();
        }
        const loginData = async(e)=>{
         e.preventDefault();
-        const res= await axios.post('/api/login', user);
+        const res= await axios.post(`${BASE_URL}/api/login`, user);
         
          const loginResponse = ()=> notify(res.data.message);
          loginResponse();

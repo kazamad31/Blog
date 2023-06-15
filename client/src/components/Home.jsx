@@ -10,11 +10,12 @@ import Header from './Header';
 
 
 const Home = () => {
+    const BASE_URL= process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const[userData, setUserData]=useState({});
     const tokenCheck = async()=> {
         try{
-        const res= await axios.get('/api/home', {withCredentials: true});
+        const res= await axios.get(`${BASE_URL}/api/home`, {withCredentials: true});
         if(!res.status===200)
         {
             navigate("/login");

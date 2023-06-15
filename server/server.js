@@ -14,8 +14,9 @@ const app= express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
-    origin: ['http://localhost:3000/','https://mernbymanish.onrender.com/'],
-    credentials: true
+    origin: ['http://localhost:3000','https://mernbymanish.onrender.com'],
+    credentials: true,
+    optionSuccessStatus:200
 }));
 app.use(cookieParser());
 app.use(router);
