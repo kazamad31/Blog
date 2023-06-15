@@ -3,8 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import DB from './db/connection.js';
 import userSchema from './Model/userSchema.js';
-import router from './Routes/auth.js';
 import cookieParser from 'cookie-parser';
+import router from './Routes/auth.js';
 import authenticate from './Middleware/authentication.js';
 
 
@@ -12,12 +12,12 @@ import authenticate from './Middleware/authentication.js';
 
 const app= express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
     origin: ['http://localhost:3000','https://mernbymanish.onrender.com'],
     credentials: true
 }));
-app.use(cookieParser());
 app.use(router);
 app.use(express.static('uploads'));
 app.use(authenticate);
