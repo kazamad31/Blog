@@ -14,7 +14,7 @@ const app= express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
-    origin: ['http://localhost:3000','https://mernbymanish.onrender.com'],
+    origin: ['http://localhost:3000','https://www.technomanish.com','https://mernbymanish.onrender.com'],
     credentials: true
 }));
 app.use(cookieParser());

@@ -58,7 +58,7 @@ router.post('/api/register',async (req, res)=>{
                             const token= await userLogin.generateAuthToken();
                             //console.log(token);
                             res.cookie("jwttoken",token, {expires: new Date(Date.now() + 86400000), httpOnly:true, sameSite: 'none',
-                            secure: true, domain:'mernbymanish.onrender.com'});
+                            secure: true, domain:'technomanish.com'});
                           res.status(202).json({message:token});
                            }
                             
