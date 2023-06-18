@@ -56,9 +56,9 @@ router.post('/api/register',async (req, res)=>{
                         if(userLogin && userLogin.password === password)
                         {
                             const token= await userLogin.generateAuthToken();
-                            //console.log(token);
-                            res.cookie("jwttoken",token, {expires: new Date(Date.now() + 86400000), httpOnly:true, sameSite: 'none',
-                            secure: true, domain:'technomanish.com'});
+                            const cookieParams = {httpOnly:true, sameSite: 'none',secure: true, domain:'technomanish.com'}
+                            res.cookie("jwttoken",token,cookieParams,{expires: new Date(Date.now() + 86400000), 
+                            });
                           res.status(202).json({message:token});
                            }
                             
