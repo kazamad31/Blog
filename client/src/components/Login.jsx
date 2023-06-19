@@ -45,13 +45,13 @@ const [user, setUser]= useState({
        }
        const registerData = async(e)=>{
         e.preventDefault();
-        const res= await axios.post(`${BASE_URL}/api/register`, user);
+        const res= await axios.post(`${BASE_URL}/api/register`, user, {withCredentials: true});
         const resdataResponse =()=> notify(res.data.message);
         resdataResponse();
        }
        const loginData = async(e)=>{
         e.preventDefault();
-        const res= await axios.post(`${BASE_URL}/api/login`, user);
+        const res= await axios.post(`${BASE_URL}/api/login`, user, {withCredentials: true});
         
          const loginResponse = ()=> notify(res.data.message);
          loginResponse();

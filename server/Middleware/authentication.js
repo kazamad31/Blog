@@ -7,7 +7,7 @@ const authenticate = async (req, res, next)=> {
     const token = req.cookies.jwttoken;
     if(!token)
     {
-       return res.status(400).send({error:"There is no token",token:token})
+       return res.status(400).send({error:"There is no token","token":token})
     }
     
    // res.json({token:token});
