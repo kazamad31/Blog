@@ -11,6 +11,7 @@ import authenticate from './Middleware/authentication.js';
 
 
 const app= express();
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
@@ -22,7 +23,6 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: [ 'Access-Control-Allow-Origin', 'Content-Type','Authorization']
 }));
-app.use(cookieParser());
 app.use(router);
 app.use(express.static('uploads'));
 app.use(authenticate);
