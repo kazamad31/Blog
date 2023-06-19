@@ -4,10 +4,10 @@ import User from '../Model/userSchema.js';
 
 const authenticate = async (req, res, next)=> {
     try{
-    const token = await req.cookies.jwttoken;
+    const token = req.cookies.jwttoken;
     if(!token)
     {
-       return res.status(400).send({error:"There is no token"})
+       return res.status(400).send({error:"There is no token",token:token})
     }
     
    // res.json({token:token});
