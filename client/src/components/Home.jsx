@@ -15,13 +15,13 @@ const Home = () => {
     const[userData, setUserData]=useState({});
     const tokenCheck = async()=> {
         try{
-        const res= await axios.post(`${BASE_URL}/api/home`, {withCredentials: true});
-        if(res.status!==200)
+        const res= await axios.get(`${BASE_URL}/api/home`, {withCredentials: true});
+        if(res.status===200)
         {
-            navigate("/login");
+        setUserData(res.data.userInfo);
         }
         else{
-        setUserData(res.data.userInfo);
+        navigate("/login");
         }
         }   
     catch (err){
