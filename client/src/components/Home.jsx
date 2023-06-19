@@ -16,7 +16,7 @@ const Home = () => {
     const tokenCheck = async()=> {
         try{
         const res= await axios.post(`${BASE_URL}/api/home`, {withCredentials: true});
-        if(!res.status===200)
+        if(res.status!==200)
         {
             navigate("/login");
         }
