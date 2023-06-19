@@ -16,7 +16,6 @@ const [user, setUser]= useState({
     password:""});
     const handleChange = (e)=>{
         const{name, value} = e.target
-        console.log(e.target);
        setUser({...user,[name]:value});
        }
     const tokenCheck = async()=> {

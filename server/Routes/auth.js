@@ -58,7 +58,7 @@ router.post('/api/register',async (req, res)=>{
                             const token= await userLogin.generateAuthToken();
                             //const cookieParams = {httpOnly:true, sameSite:'none',secure:true, overwrite:true}
                             res.cookie("jwttoken",token,{expires: new Date(Date.now() + 86400000), httpOnly:true});
-                          res.status(202).json({message:token});
+                          res.status(202).json({message:"Login Successfully"});
                            }
                             
                         else{

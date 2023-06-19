@@ -6,18 +6,19 @@ import axios from 'axios';
 
 
 const About = () => {
+  const BASE_URL= process.env.REACT_APP_API_URL;
   const [userData, setUserData]= useState({});
   const navigate = useNavigate();
   const ary = ['mango', 'apple', 'banana', 'orange'];
   const tokenCheck = async()=> {
     try{
-    const res= await axios.get('/api/about', {withCredentials: true});
-    if(!res.status===200)
+    const res= await axios.get(`${BASE_URL}/api/about`, {withCredentials: true});
+    if(res.status===200)
     {
-        navigate("/login");
+    setUserData(res.data.userInfo);
     }
     else{
-    setUserData(res.data.userInfo);
+    navigate("/login");
     }
     }   
 catch (err){

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 
 const Profile = () => {
+  const BASE_URL= process.env.REACT_APP_API_URL;
   const navigate=useNavigate();
   const notify=(message)=>toast(`${message}`);
   const[userData, setUserData]=useState({});
@@ -22,13 +23,13 @@ const Profile = () => {
   
   const tokenCheck = async()=> {
     try{
-    const res= await axios.get('/api/profile', {withCredentials: true});
-    if(!res.status===200)
+    const res= await axios.get(`${BASE_URL}/api/profile`, {withCredentials: true});
+    if(res.status===200)
     {
-        navigate("/login");
+    setUserData(res.data.userInfo);
     }
     else{
-    setUserData(res.data.userInfo);
+    navigate("/login");
     }
     }   
 catch (err){
@@ -56,7 +57,7 @@ navigate("/login");
     },
     withCredentials: true
   };
-  const sendFile= await axios.post('/api/profile/file-upload', formData, config);
+  const sendFile= await axios.post(`${BASE_URL}/api/profile/file-upload`, formData, config);
   (()=> notify(sendFile.data.message))();
   }
   else {
@@ -70,13 +71,13 @@ navigate("/login");
  }
 }
 const dp= userData?.profile?.avtar;
-const img= (dp!==undefined)? `https://mernappbymanish.onrender.com/${userData?.profile?.avtar}` : "https://mernappbymanish.onrender.com/profile_pic.jpg" ;
+const img= (dp!==undefined)? `${BASE_URL}/${userData?.profile?.avtar}` : `${BASE_URL}/profile_pic.jpg`;
 const proUpdate =async()=>{
   if (!updatedUser?.profile?.profession && !updatedUser?.profile?.phone && !updatedUser?.profile?.address){
     (()=>notify("Please fill the details first"))();
   }
   else{
-    const res = await axios.post('/api/profile/profile-update', updatedUser, {withCredentials:true});
+    const res = await axios.post(`${BASE_URL}/api/profile/profile-update`, updatedUser, {withCredentials:true});
     (()=>notify(res.data.message))();
   }
   
