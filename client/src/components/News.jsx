@@ -9,27 +9,30 @@ import Header from './Header';
 import Image from '../Image/metaverse6.jpg';
 
 const News = () => {
+const BASE_URL= process.env.REACT_APP_API_URL;
 const[userData, setUserData]=useState({});
 const [posts,setPost]= useState([]);
 const [search, setSearch]= useState({squery:"india"});
 const navigate = useNavigate();
 const notify=(message)=>toast(`${message}`); 
 const tokenCheck = async()=> {
-    try{
-    const res= await axios.get('/api/token_check', {withCredentials: true});
-    if(!res.status===200)
-    {
-        navigate("/login");
-    }
-    else{
-    setUserData(res.data.userInfo);
-    }
-    }   
+  try{
+  const res= await axios.get(`${BASE_URL}/api/token_check`, {withCredentials: true});
+  if(res.status===200)
+  {
+  setUserData(res.data.userInfo);
+  }
+  else{
+  navigate("/login");
+  }
+  }   
 catch (err){
+console.log(userData);
 console.log(err);
 navigate("/login");
 }
 }
+
     const onChangeHandler=(e)=>{
     e.preventDefault();
     setSearch({...posts, squery:`${e.target.value}`});
@@ -37,7 +40,7 @@ navigate("/login");
     const fetchApi =async()=>{
         try{   
           console.log(search.squery);  
-    const res = await axios.post('/api/news',search, {withCredentials:true});
+    const res = await axios.post(`${BASE_URL}/api/news`,search, {withCredentials:true});
     if(res.status!== 200){
       console.log(res.data.message);
         notify(res.data.message);
