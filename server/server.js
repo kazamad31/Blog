@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import DB from './db/connection.js';
 import userSchema from './Model/userSchema.js';
 import router from './Routes/auth.js';
+import path from 'path';
 import authenticate from './Middleware/authentication.js';
 
 
