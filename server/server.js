@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import DB from './db/connection.js';
 import userSchema from './Model/userSchema.js';
 import router from './Routes/auth.js';
-import path from 'path';
 import authenticate from './Middleware/authentication.js';
 
 
@@ -25,7 +24,6 @@ app.use(cors({
     allowedHeaders: [ 'Access-Control-Allow-Origin', 'Content-Type','Authorization']
 }));
 app.use(router);
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static('uploads'));
 app.use(authenticate);
 dotenv.config({path:'./config.env'});
@@ -34,7 +32,4 @@ const PORT= process.env.PORT || 5000;
 app.get('/', (req, res)=>{
     res.send("Hello world from the server")
 });
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
 app.listen(PORT,()=>{console.log("Server is running at port no 5000")});
