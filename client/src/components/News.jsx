@@ -27,7 +27,6 @@ const tokenCheck = async()=> {
   }
   }   
 catch (err){
-console.log(userData);
 console.log(err);
 navigate("/login");
 }

@@ -44,7 +44,7 @@ tokenCheck();
         <div className="row">
             <div className="col-lg-7 col-xl-5">
                 <div className="text-container">
-                    <h1 className="h1-large">Beautifying office spaces</h1>
+                    <h1 className="h1-large">{`Welcome ${userData.name}`}</h1>
                     <p className="p-large">Is education residence conveying and sore. Suppose shyness say ten behaved morning had. Any propose assist compliment occasional too reasonably</p>
                     <a className="btn-solid-lg" href="#introduction">More details</a>
                     <a className="btn-outline-lg" href="#contact">Contact us</a>

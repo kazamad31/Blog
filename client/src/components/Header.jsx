@@ -1,7 +1,17 @@
 import React from 'react'
 import '../comp-css/Home.css';
+import {useState} from 'react';
 
 const Header = (props) => {
+const [Navbar, setNavbar] =useState("navbar-collapse offcanvas-collapse");
+const onChangeHandler =()=>{
+    if(Navbar==="navbar-collapse offcanvas-collapse"){
+    setNavbar("navbar-collapse offcanvas-collapse open");
+    }
+    else{
+        setNavbar("navbar-collapse offcanvas-collapse");
+    }  
+}
 
   return (
     <div> 
@@ -11,17 +21,17 @@ const Header = (props) => {
 
         <a className="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"/></a> 
 
-        <button className="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+        <button className="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation" onClick={onChangeHandler}>
             <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <div className= {Navbar} id="navbarsExampleDefault">
             <ul className="navbar-nav ms-auto navbar-nav-scroll">
                 <li className="nav-item">
                     <a className="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#details">Details</a>
+                    <a className="nav-link" href="home#details">Details</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="/news">News</a>
@@ -41,7 +51,7 @@ const Header = (props) => {
                 </li>
             </ul>
             <span className="nav-item">
-                <a className="btn-outline-sm" href="#contact">Contact us</a>
+                <a className="btn-outline-sm" href="home#contact">Contact us</a>
             </span>
         </div>
     </div>

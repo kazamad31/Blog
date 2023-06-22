@@ -327,7 +327,8 @@ a:hover {
 	top: 3.25rem; /* adjusts the height between the top of the page and the offcanvas menu */
 	bottom: 0;
 	left: 100%;
-	width: 100%;
+	width: 30%;
+	height:45%;
 	padding-right: 1rem;
 	padding-left: 1rem;
 	overflow-y: auto;
@@ -1321,7 +1322,7 @@ a:hover {
 	}
 
 	.header .h1-large {
-		font-size: 4.25rem;
+		font-size: 4.2rem;
 		line-height: 4.875rem;
 	}
 
