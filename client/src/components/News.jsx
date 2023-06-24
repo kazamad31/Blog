@@ -41,7 +41,6 @@ navigate("/login");
           console.log(search.squery);  
     const res = await axios.post(`${BASE_URL}/api/news`,search, {withCredentials:true});
     if(res.status!== 200){
-      console.log(res.data.message);
         notify(res.data.message);
     }
     else{
@@ -78,7 +77,7 @@ navigate("/login");
       <i className="fa-solid fa-magnifying-glass"></i>
     </div>
   
-    {posts.length!==12 ? <p style={{position:'relative',fontSize:'20px', display:'flex',justifyContent:'center',alignItems:'center',top:'140px'}}>Invalid Country Name!</p> : (<div style={{position:'relative', top:'140px'}}>
+    {posts.length!==12 ? <p style={{position:'relative',fontSize:'20px', display:'flex',justifyContent:'center',alignItems:'center',top:'140px'}}>Invalid keyword!</p> : (<div style={{position:'relative', top:'140px'}}>
       <div className='container-fluid mb-5'>
         <div className='row'>
           <div className='col-10 mx-auto'>

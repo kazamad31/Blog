@@ -58,7 +58,11 @@ navigate("/login");
     withCredentials: true
   };
   const sendFile= await axios.post(`${BASE_URL}/api/profile/file-upload`, formData, config);
-  (()=> notify(sendFile.data.message))();
+  const myData = await sendFile.data;
+  (()=> notify(myData.message))();
+  if (sendFile.status===200){
+   setUserData(myData.userInfo);
+  }
   }
   else {
     (()=>notify("Please select valid file type"))();
