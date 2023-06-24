@@ -102,10 +102,10 @@ router.post('/api/register',async (req, res)=>{
                         const myuser=req.rootUser;  
                         const updatedUser= await(User.findOneAndUpdate({_id:myuser._id},{$set:{'profile.avtar':fileName}},{new:true}));
                         await updatedUser.save(); 
-                        res.status(200).json({message:`Profile avtar ${fileName} has been updated`});
+                        res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});
                         }
                         else{
-                            res.status(203).json({message:`There is no such file`});
+                            res.status(203).json({message:"There is no such file"});
                         }
                     }
                     catch(error){
