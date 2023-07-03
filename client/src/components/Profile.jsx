@@ -146,7 +146,7 @@ tokenCheck();
                       <label htmlFor="fname">Name</label>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                      <input type="text" id="fname" name="fname" readOnly defaultValue={userData.name} onChange={handleChange}/>
+                      <input type="text" id="fname" name="fname" readOnly defaultValue={userData?.name} onChange={handleChange}/>
                       </div>
                     </div>
                     <hr />
@@ -155,7 +155,7 @@ tokenCheck();
                       <label htmlFor="email">Email</label>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                      <input type="email" id="email" name="email" readOnly defaultValue={userData.email} />
+                      <input type="email" id="email" name="email" readOnly defaultValue={userData?.email} />
                       </div>
                     </div>
                     <hr />
