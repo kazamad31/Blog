@@ -173,6 +173,7 @@ router.post('/api/register',async (req, res)=>{
                                   };
                                const sUser = await run(subscribingUser);
                                if(!sUser){
+
                                return res.status(202).json({message:"User already existed"});
                                }
                                else{

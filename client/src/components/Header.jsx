@@ -40,7 +40,7 @@ const onChangeHandler =()=>{
                     <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" role="button" href="/#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{props.info.name}</a>
+                    <a className="nav-link dropdown-toggle" role="button" href="/#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{props?.info?.name}</a>
                     <ul className="dropdown-menu" aria-labelledby="dropdown01">
                         <li><a className="dropdown-item" href="/profile">Profile</a></li>
                         <li><div className="dropdown-divider"></div></li>

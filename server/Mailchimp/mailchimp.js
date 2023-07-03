@@ -1,8 +1,7 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
-//const {Client, Config, Subscriber} = mailchimp;
 
 mailchimp.setConfig({
-    apiKey: "921202ad2d2abbacb36e0ca991f37e5e-us10",
+    apiKey: `${process.env.MAILCHIMP}`,
     server: "us10",
   });
 
@@ -11,7 +10,6 @@ mailchimp.setConfig({
     try{    
       const response = await mailchimp.lists.setListMember(listId,"subscriber_hash",{
       email_address: subscribingUser.email,
-      //status: "subscribed",
       status_if_new: "subscribed",
       merge_fields:{
         NAME: subscribingUser.name,
@@ -23,6 +21,6 @@ mailchimp.setConfig({
     
   }
 catch(error){
-  console.log(error.status);
+  console.log(error);
 }
   }
