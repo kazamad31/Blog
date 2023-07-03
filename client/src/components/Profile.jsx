@@ -40,9 +40,8 @@ navigate("/login");
    setFiles(e.target.files[0]);
   };
   const fileUpload= async(e)=>{
-    try{
-
     e.preventDefault();
+    try{
   const image= files.name.substring(files.name.lastIndexOf('.')+1).toLowerCase();
   
   if (image==='jpg' || image==='png' || image==='jpeg'){
