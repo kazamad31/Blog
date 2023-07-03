@@ -35,7 +35,6 @@ const Home = () => {
         const {name, value} =e.target;
         setSubscriber({...subscriber,[name]:value});
     }
-    console.log(subscriber);
     const subscribing = async(e)=>{
         e.preventDefault();
         const subscriberInfo = await axios.put(`${BASE_URL}/api/home/subscriber`, subscriber, {withCredentials:true});

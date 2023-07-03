@@ -44,7 +44,6 @@ const onChangeHandler =()=>{
                     <ul className="dropdown-menu" aria-labelledby="dropdown01">
                         <li><a className="dropdown-item" href="/profile">Profile</a></li>
                         <li><div className="dropdown-divider"></div></li>
-                        <li><a className="dropdown-item" href="terms.html">Help & Support</a></li>
                         <li><div className="dropdown-divider"></div></li>
                         <li><a className="dropdown-item"  href="/logout">Logout</a></li>
                     </ul>

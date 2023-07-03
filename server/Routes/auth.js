@@ -103,7 +103,10 @@ router.post('/api/register',async (req, res)=>{
                         const updatedUser= await(User.findOneAndUpdate({_id:myUser._id},{$set:{'profile.avtar':fileName}},{new:true}));
                         await updatedUser.save(); 
                         const filePath=join(__dirname,'..','uploads', `${oldPic}`); 
-                        await fsPromises.unlink(filePath);
+                        if(oldPic!==undefined)
+                        {
+                            await fsPromises.unlink(filePath);
+                        }
                         res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});
                         }
                         else{

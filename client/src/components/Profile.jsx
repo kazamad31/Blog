@@ -108,7 +108,7 @@ tokenCheck();
                       <input type="file" id ="file" className="avtar" name="avtar" onChange={myFile} accept="image/png image/jpeg"/>
                       <button type="submit" className="pro-button" onClick={fileUpload}>Update</button> 
                       </div>
-                        <h4>{userData.name}</h4>
+                        <h4>{userData?.name}</h4>
                         <p className="text-secondary mb-1">{userData?.profile?.profession}</p>
                         <p className="text-muted font-size-sm">{userData?.profile?.address}</p>
                         <button className="btn btn-primary">Follow</button>
