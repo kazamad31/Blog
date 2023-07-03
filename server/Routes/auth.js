@@ -2,22 +2,22 @@ import  express, { application }  from 'express';
 import User from '../Model/userSchema.js'
 import jwt from 'jsonwebtoken';
 import authenticate from '../Middleware/authentication.js';
-import multer, { diskStorage } from 'multer';
+import upload from '../Multer/multer.js'
 import axios from 'axios';
 import dotenv from 'dotenv';
+import {fileURLToPath} from 'url';
+import {dirname, join} from 'path'
+import {promises as fsPromises} from 'fs';
+import {run} from '../Mailchimp/mailchimp.js';
 const key=process.env.API_KEY;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 const router = express.Router();
-const storage= multer.diskStorage({destination: (req,file,cb)=>{
-    cb(null, 'uploads/')
-}, filename:(req,file,cb)=>{
-    cb(null,file.originalname)
-}});
-const upload=multer({storage:storage}).single('file');
 router.get('/', (req, res)=>{
-    res.send(`hello message from router`);
-    
+    res.send({
+        "status": false,"message": "invalid json data"});
 });
 router.post('/api/register',async (req, res)=>{
     try{
@@ -28,14 +28,13 @@ router.post('/api/register',async (req, res)=>{
     }
     else{
         const userExist= await (User.findOne({email: email}));
-            //console.log(userExist);
             if(userExist){
                 return res.status(409).json({message:"User already existed"});
             }
             else{
                 const user = new User(req.body);
                await user.save();
-                    res.status(201).json({message:"Successfully Registered on database"});
+                    res.status(201).json({message:"Successfully Registered"});
             }
         }
     }
@@ -99,9 +98,12 @@ router.post('/api/register',async (req, res)=>{
                         if(req.body!==null)
                         {
                         const fileName= req.body.fileName;
-                        const myuser=req.rootUser;  
-                        const updatedUser= await(User.findOneAndUpdate({_id:myuser._id},{$set:{'profile.avtar':fileName}},{new:true}));
+                        const myUser=req.rootUser;
+                        const oldPic=myUser.profile.avtar;
+                        const updatedUser= await(User.findOneAndUpdate({_id:myUser._id},{$set:{'profile.avtar':fileName}},{new:true}));
                         await updatedUser.save(); 
+                        const filePath=join(__dirname,'..','uploads', `${oldPic}`); 
+                        await fsPromises.unlink(filePath);
                         res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});
                         }
                         else{
@@ -157,6 +159,26 @@ router.post('/api/register',async (req, res)=>{
                                 catch(error){
                                   console.log(error);
                                 }
+                             });
+                             router.put('/api/home/subscriber', async(req, res)=>{
+                                try{ 
+                                    const {name,email,message}=req.body;
+                                    const subscribingUser = {
+                                    name: name,
+                                    message: message,
+                                    email: email
+                                  };
+                               const sUser = await run(subscribingUser);
+                               if(!sUser){
+                               return res.status(202).json({message:"User already existed"});
+                               }
+                               else{
+                               return res.status(200).json({message:"Successfully subscribed"});
+                             }
+                            }
+                            catch(error){
+                                console.log(error);
+                            }
                              });
 
             

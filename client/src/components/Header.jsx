@@ -19,7 +19,7 @@ const onChangeHandler =()=>{
     <div className="container">
 
 
-        <a className="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"/></a> 
+        <a className="navbar-brand logo-image" href="/home"><img src="images/logo.svg" alt="alternative"/></a> 
 
         <button className="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation" onClick={onChangeHandler}>
             <span className="navbar-toggler-icon"></span>

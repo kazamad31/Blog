@@ -11,8 +11,10 @@ import Header from './Header';
 
 const Home = () => {
     const BASE_URL= process.env.REACT_APP_API_URL;
-    const navigate = useNavigate();
     const[userData, setUserData]=useState({});
+    const [subscriber, setSubscriber] =useState({})
+    const navigate = useNavigate();
+    const notify=(message)=>toast(`${message}`);
     const tokenCheck = async()=> {
         try{
         const res= await axios.get(`${BASE_URL}/api/home`, {withCredentials: true});
@@ -28,6 +30,16 @@ const Home = () => {
     console.log(err);
     navigate("/login");
     }
+    }
+    const onChangeHandler=(e)=>{
+        const {name, value} =e.target;
+        setSubscriber({...subscriber,[name]:value});
+    }
+    console.log(subscriber);
+    const subscribing = async(e)=>{
+        e.preventDefault();
+        const subscriberInfo = await axios.put(`${BASE_URL}/api/home/subscriber`, subscriber, {withCredentials:true});
+        notify(subscriberInfo.data.message);
     }
 useEffect(() => {
 tokenCheck();
@@ -199,15 +211,15 @@ tokenCheck();
                     <h2>Contact us for a quote using the following form</h2>
 
                  
-                    <form>
+                    <form onSubmit={subscribing}>
                         <div className="form-group">
-                            <input type="text" className="form-control-input" placeholder="Name" required/>
+                            <input type="text" className="form-control-input" name="name" placeholder="Name" required onChange={onChangeHandler}/>
                         </div>
                         <div className="form-group">
-                            <input type="email" className="form-control-input" placeholder="Email" required/>
+                            <input type="email" className="form-control-input" name="email" placeholder="Email" required onChange={onChangeHandler}/>
                         </div>
                         <div className="form-group">
-                            <textarea className="form-control-textarea" placeholder="Message" required></textarea>
+                            <textarea className="form-control-textarea" name="message" placeholder="Message" required onChange={onChangeHandler}></textarea>
                         </div>
                         <div className="form-group">
                             <button type="submit" className="form-control-submit-button">Submit</button>

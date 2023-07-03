@@ -1,10 +1,10 @@
 import multer, { diskStorage } from 'multer';
 
 const storage= multer.diskStorage({destination: (req,file,cb)=>{
-    cb(null, 'Images')
+    cb(null, 'uploads/')
 }, filename:(req,file,cb)=>{
-    cb(null,file.fieldname+'_'+Date.mow())
+    cb(null,file.originalname)
 }});
-const upload=multer({storage:storage}).single('fileName');
+const upload=multer({storage:storage}).single('file');
 
 export default upload;

@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Card from './Card';
 import axios from 'axios';
 import Header from './Header';
-import Image from '../Image/metaverse6.jpg';
 
 const News = () => {
 const BASE_URL= process.env.REACT_APP_API_URL;
@@ -34,11 +33,10 @@ navigate("/login");
 
     const onChangeHandler=(e)=>{
     e.preventDefault();
-    setSearch({...posts, squery:`${e.target.value}`});
+    setSearch({...search, squery:`${e.target.value}`});
     }
     const fetchApi =async()=>{
         try{   
-          console.log(search.squery);  
     const res = await axios.post(`${BASE_URL}/api/news`,search, {withCredentials:true});
     if(res.status!== 200){
         notify(res.data.message);
@@ -62,7 +60,6 @@ navigate("/login");
      }
          }
 
-          
       
     useEffect(()=>{
        tokenCheck();
@@ -73,7 +70,7 @@ navigate("/login");
         <Header info={userData}/>
     <div style={{ position: 'relative', top: '100px', left: '50%', transform: 'translate(-50%,-50%)', background: '#2f3640', color: '#e84118', height: '45px', borderRadius: '40px', padding: '10px',margin:'20px',width:'300px',display:'flex',justifyContent:'center',alignItems:'center' }} className="inputData">
       <input type="search" style={{ border: 'none', outline: 'none', float: 'left', background: 'none', padding: '0', color: 'white', fontSize: '16px', transition: '0.4s', width: '240px' }} placeholder=" Type the news keyword" className="inputField" onChange={onChangeHandler} />
-      <a href="#" style={{ color: '#e84118', float: 'right', width: '40px', height: '40px', textAlign: 'center', borderRadius: '50%', background: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', bottom: '0',left:'22px' }} className="searchButton" onClick={fetchApi} value="Submit" />
+      <a href="# " style={{ color: '#e84118', float: 'right', width: '40px', height: '40px', textAlign: 'center', borderRadius: '50%', background: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', bottom: '0',left:'22px' }} className="searchButton" onClick={fetchApi} value="Submit" />
       <i className="fa-solid fa-magnifying-glass"></i>
     </div>
   
@@ -84,7 +81,7 @@ navigate("/login");
             <div className='row gy-4'>
               {
                 posts.map((val, ind) => {
-                  return <Card key={ind} imgsrc={(val.image)!=="undefined"? val.image.contentUrl : Image} title={val.name} description={val.description} url={val.url} />
+                  return <Card key={ind} imgsrc={val.image.contentUrl} title={val.name} description={val.description} url={val.url} />
                 })
               }
             </div>

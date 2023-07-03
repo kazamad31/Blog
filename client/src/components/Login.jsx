@@ -69,7 +69,7 @@ return (
     <div id="bk">
     <div className={login} id="containers">
         <div className="form-container sign-up-container">
-            <form className="frm" method="POST">
+            <form className="frm" method="POST" onSubmit={registerData}>
                 <h1 className="hr">Create Account</h1>
                 <div className="social-container">
                     <a href="https://www.facebook.com/" target="_blank"className="social" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
@@ -80,11 +80,11 @@ return (
                 <input className="inpt"type="text" autoComplete='off' required name='name' placeholder="Name" value={user.name} onChange={handleChange}/>
                 <input className="inpt"type="email" autoComplete='off' required name='email' placeholder="Email" value={user.email} onChange={handleChange}/>
                 <input className="inpt"type="password" autoComplete='off' required name='password' placeholder="Password" value={user.password} onChange={handleChange}/>
-                <button type="submit" onClick={registerData}>Sign Up </button>
+                <button type="submit">Sign Up </button>
             </form>
         </div>
         <div className="form-container sign-in-container">
-            <form className="frm" method="POST">
+            <form className="frm" onSubmit={loginData}>
                 <h1 className="hr">Sign in</h1>
                 <div className="social-container">
                     <a href="https://www.facebook.com/" target="_blank"className="social" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
@@ -95,7 +95,7 @@ return (
                 <input className="inpt" type="email" autoComplete='off' required name='email' placeholder="Email" value={user.email} onChange={handleChange} />
                 <input className="inpt" type="password" autoComplete='off' required name='password' placeholder="Password" value={user.password} onChange={handleChange} />
                 <a className="social" href="/#">Forgot your password?</a>
-                <button type="submit" onClick={loginData}>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div className="overlay-container">
