@@ -2,7 +2,7 @@ import  express, { application }  from 'express';
 import User from '../Model/userSchema.js'
 import jwt from 'jsonwebtoken';
 import authenticate from '../Middleware/authentication.js';
-import upload from '../Multer/multer.js'
+import uploadMiddleware from '../Multer/multer.js'
 import axios from 'axios';
 import dotenv from 'dotenv';
 import {fileURLToPath} from 'url';
@@ -71,11 +71,9 @@ router.post('/api/register',async (req, res)=>{
 
                      });
                      router.get('/api/token_check', authenticate, (req, res)=>{
-                        console.log("this is token check");
                         res.status(200).json({userInfo:req.rootUser,message:"authorized"});
                      });
                      router.get('/api/home',authenticate, (req, res)=>{
-                        console.log(`Hello this is my home`);
                          res.status(200).json({userInfo:req.rootUser});
                      });
                      router.get('/api/about',authenticate, (req, res)=>
@@ -89,25 +87,30 @@ router.post('/api/register',async (req, res)=>{
                      });
                      router.get('/logout', (req, res)=>
                      {
-                        console.log("I am going to logout");
                      res.clearCookie('jwttoken');
                      return res.status(200).json({message:"Successfully Logout"});
                      });
-                     router.post('/api/profile/file-upload',authenticate,upload,async(req, res)=>{
+                     router.post('/api/profile/file-upload',authenticate,uploadMiddleware,async(req, res)=>{
                     try{
                         if(req.body!==null)
                         {
-                        const fileName= req.body.fileName;
+                        const fileName = req.uploadedFile;
                         const myUser=req.rootUser;
-                        const oldPic=myUser.profile.avtar;
+                        const oldPic =`${req.rootUser.profile.avtar}`;
+                        const dp =oldPic.substring(oldPic.lastIndexOf('.')+1).toLowerCase();
                         const updatedUser= await(User.findOneAndUpdate({_id:myUser._id},{$set:{'profile.avtar':fileName}},{new:true}));
                         await updatedUser.save(); 
-                        const filePath=join(__dirname,'..','uploads', `${oldPic}`); 
-                        if(oldPic!==undefined)
-                        {
+                        const filePath=join(__dirname,'..','uploads', oldPic);
+                        if(dp==="jpg" || dp==="png" || dp==="jpeg")
+                        {   
                             await fsPromises.unlink(filePath);
+                            res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});  
                         }
-                        res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});
+                        else{
+                        
+                           res.status(200).json({message:`Profile avtar ${fileName} has been updated`, userInfo:updatedUser});
+                        }
+                        
                         }
                         else{
                             res.status(203).json({message:"There is no such file"});
@@ -125,7 +128,7 @@ router.post('/api/register',async (req, res)=>{
                                 const userInfo= req.body;
                                 const updatedUser = await(User.findOneAndUpdate({_id:myuser._id},{$set:{'profile.profession':userInfo.profile.profession, 'profile.phone':userInfo.profile.phone, 'profile.address':userInfo.profile.address}}, {new:true}));
                                 updatedUser.save();
-                                res.status(202).json({message:"User profile has been successfully updated"});
+                                res.status(200).json({message:"User profile has been successfully updated", userInfo:updatedUser});
                              });
                              router.post('/api/news', authenticate, async(req, res)=>{
 

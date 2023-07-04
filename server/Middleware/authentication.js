@@ -10,7 +10,6 @@ const authenticate = async (req, res, next)=> {
        return res.status(400).send({error:"There is no token"})
     }
     
-   // res.json({token:token});
     const verifyToken = jwt.verify(token, process.env.SECRET);
     //console.log(verifyToken);
     const rootUser = await User.findOne({_id : verifyToken._id, "tokens.token":token});
@@ -20,10 +19,8 @@ if(!rootUser)
    return res.status(401).json({message:"Invalid token"});
 }
 
- //res.status(200).json({message:"Authorization successful"});
 
 req.rootUser= rootUser;
-//console.log(req.rootUser);
  next();
  
     }

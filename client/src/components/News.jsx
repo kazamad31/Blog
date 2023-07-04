@@ -51,18 +51,22 @@ navigate("/login");
           return {...val, image:{contentUrl:"https://www.printasia.in/media/catalog/product/c/-/c-p-6_news_paper_howker_.jpg"}};
          }
       });
-    setPost(filterNews);
+    localStorage.setItem('mydata',JSON.stringify(filterNews));
+    const myLocalStorage = JSON.parse(localStorage.getItem('mydata'));
+    setPost(myLocalStorage);
+    
     }
+    
      }
    catch(error){
    console.log(error);
 
      }
          }
-
-      
+            
     useEffect(()=>{
        tokenCheck();
+       setPost(JSON.parse(localStorage.getItem('mydata')));
        },[]); 
       
     return (

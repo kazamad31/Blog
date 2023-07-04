@@ -23,7 +23,7 @@ const Logout = () => {
         }, []);
 
   return (
-    <div>This is Logout</div>
+    <div></div>
   )
 }
 

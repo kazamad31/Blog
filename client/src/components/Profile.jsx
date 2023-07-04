@@ -74,13 +74,18 @@ navigate("/login");
 }
 const dp= userData?.profile?.avtar;
 const img= (dp!==undefined)? `${BASE_URL}/${userData?.profile?.avtar}` : `${BASE_URL}/profile_pic.jpg`;
+
 const proUpdate =async()=>{
   if (!updatedUser?.profile?.profession && !updatedUser?.profile?.phone && !updatedUser?.profile?.address){
-    (()=>notify("Please fill the details first"))();
+    notify("Please fill the details first");
   }
   else{
     const res = await axios.post(`${BASE_URL}/api/profile/profile-update`, updatedUser, {withCredentials:true});
-    (()=>notify(res.data.message))();
+    const updatedData =await res.data;
+    notify(updatedData.message);
+    if(res.status===200){
+      setUserData(updatedData.userInfo);
+    }
   }
   
   

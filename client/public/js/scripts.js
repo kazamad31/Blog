@@ -12,11 +12,12 @@ window.onload = function () {
 };
 
 function scrollFunction() {
-	if (document.documentElement.scrollTop > 30) {
+	window.addEventListener("DOMContentLoaded", (event)=>{
+		if (document.documentElement.scrollTop > 30) {
 		document.getElementById("navbar").classList.add("top-nav-collapse");
 	} else if ( document.documentElement.scrollTop < 30 ) {
 		document.getElementById("navbar").classList.remove("top-nav-collapse");
-	}
+	}});
 }
 
 // Navbar on mobile
@@ -27,9 +28,13 @@ for (let i = 0; i < elements.length; i++) {
 		document.querySelector(".offcanvas-collapse").classList.toggle("open");
 	});
 }
-
-document.querySelector(".navbar-toggler").addEventListener("click", () => {
-  	document.querySelector(".offcanvas-collapse").classList.toggle("open");
+window.addEventListener("DOMContentLoaded", (event)=>{
+	const el= document.querySelector(".navbar-toggler");
+	if(el){
+		el.addEventListener("click", () => {
+			document.querySelector(".offcanvas-collapse").classList.toggle("open");
+	  });
+	}
 });
 
 // Hover on desktop
@@ -87,15 +92,18 @@ var cardSlider = new Swiper('.card-slider', {
 
 /* Back To Top Button */
 // Get the button
-const myButton = document.getElementById("myBtn");
+
 
 // When the user scrolls down 20px from the top of the document, show the button
 function scrollFunctionBTT() {
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-		myButton.style.display = "block";
-	} else {
-		myButton.style.display = "none";
-	}
+	window.addEventListener("DOMContentLoaded", (event)=>{
+		const myButton = document.getElementById("myBtn");
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			myButton.style.display = "block";
+		} else {
+			myButton.style.display = "none";
+		}	
+	});	
 }
 
 // When the user clicks on the button, scroll to the top of the document
