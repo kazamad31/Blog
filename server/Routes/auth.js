@@ -155,7 +155,8 @@ router.post('/api/register',async (req, res)=>{
                                     const news= await axios.request(options);
                                     const newsArticle =news.data.value;
         
-                                    if(newsArticle.length!==12){
+                                    if(newsArticle.length!==8){
+                                        console.log(newsArticle);
                                        return res.status(401).json({message:"Invalid Request"});
                                     }
                                     else{

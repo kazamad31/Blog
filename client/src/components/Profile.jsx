@@ -25,7 +25,9 @@ const Profile = () => {
     const res= await axios.get(`${BASE_URL}/api/profile`, {withCredentials: true});
     if(res.status===200)
     {
-    setUserData(res.data.userInfo);
+      localStorage.setItem('mypro',JSON.stringify(res.data.userInfo));
+      const myLocalStorage = JSON.parse(localStorage.getItem('mypro'));
+    setUserData(myLocalStorage);
     }
     else{
     navigate("/login");
@@ -59,7 +61,9 @@ navigate("/login");
   const myData = await sendFile.data;
   (()=> notify(myData.message))();
   if (sendFile.status===200){
-   setUserData(myData.userInfo);
+    localStorage.setItem('mypro',JSON.stringify(myData.userInfo));
+    const myLocalStorage = JSON.parse(localStorage.getItem('mypro'));
+   setUserData(myLocalStorage);
   }
   }
   else {
@@ -76,7 +80,7 @@ const dp= userData?.profile?.avtar;
 const img= (dp!==undefined)? `${BASE_URL}/${userData?.profile?.avtar}` : `${BASE_URL}/profile_pic.jpg`;
 
 const proUpdate =async()=>{
-  if (!updatedUser?.profile?.profession && !updatedUser?.profile?.phone && !updatedUser?.profile?.address){
+  if (!(updatedUser?.profile?.profession) && !(updatedUser?.profile?.phone) && !(updatedUser?.profile?.address)){
     notify("Please fill the details first");
   }
   else{
@@ -84,7 +88,9 @@ const proUpdate =async()=>{
     const updatedData =await res.data;
     notify(updatedData.message);
     if(res.status===200){
-      setUserData(updatedData.userInfo);
+      localStorage.setItem('mypro',JSON.stringify(updatedData.userInfo));
+    const myLocalStorage = JSON.parse(localStorage.getItem('mypro'));
+      setUserData(myLocalStorage);
     }
   }
   
