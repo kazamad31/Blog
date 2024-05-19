@@ -9,7 +9,7 @@ import {fileURLToPath} from 'url';
 import {dirname, join} from 'path'
 import {promises as fsPromises} from 'fs';
 import {run} from '../Mailchimp/mailchimp.js';
-const key=process.env.API_KEY;
+const key = process.env.API_KEY;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -134,26 +134,24 @@ router.post('/api/register',async (req, res)=>{
 
                                 try{
                                    const {squery}=req.body;
-                                    const options = {
-                                        method: 'GET',
-                                        url: 'https://bing-news-search1.p.rapidapi.com/news/search',
-                                        params: {
-                                          q: `${squery}`,
-                                          freshness: 'Day',
-                                          textFormat: 'Raw',
-                                          safeSearch: 'Off',
-                                          originalImg: true,
-                                          count:12,
-                                          offset:0
-                                        },
-                                        headers: {
-                                          'X-BingApis-SDK': 'true',
-                                          'X-RapidAPI-Key': `${key}`,
-                                          'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
-                                        }
+                                   const options = {
+                                    method: 'GET',
+                                    url: 'https://newscatcher.p.rapidapi.com/v1/search_enterprise',
+                                    params: {
+                                      q: `${squery}`,
+                                      lang: 'en',
+                                      sort_by: 'relevancy',
+                                      page: '1',
+                                      media: 'True'
+                                    },
+                                    headers: {
+                                      'X-RapidAPI-Key': process.env.API_KEY,
+                                      'X-RapidAPI-Host': 'newscatcher.p.rapidapi.com'
                                     }
+                                  };
                                     const news= await axios.request(options);
-                                    const newsArticle =news.data.value;
+                                    //const newsArticle =news.data.value;
+                                    console.log(news);
         
                                     if(newsArticle.length<8){
                                        return res.status(401).json({message:"Invalid Request"});
@@ -187,6 +185,15 @@ router.post('/api/register',async (req, res)=>{
                                 console.log(error);
                             }
                              });
+                                router.get('/api/pnrenq',async(req,res)=>{
+                                const username=process.env.USER_NAME
+                                const password=process.env.PASSWORD
+                                console.log(username,password);
+                                const url="https://ws.irctc.co.in/eticketing/webservices/taenqservices/pnrenquiry/2911007217?pnrEnqType=ALL"
+                                const response= await axios.get(url,{auth:{username:username,password:password}});
+                               return res.status(200).json({data:response.data})
+
+                             })
 
             
 export default router;
