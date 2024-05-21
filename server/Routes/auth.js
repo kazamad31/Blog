@@ -186,9 +186,8 @@ router.post('/api/register',async (req, res)=>{
                             }
                              });
                                 router.get('/api/pnrenq',async(req,res)=>{
-                                const username=process.env.USER_NAME
-                                const password=process.env.PASSWORD
-                                console.log(username,password);
+                                const username=process.env.USER_NAME;
+                                const password=process.env.PASSWORD;
                                 const url="https://ws.irctc.co.in/eticketing/webservices/taenqservices/pnrenquiry/2911007217?pnrEnqType=ALL"
                                 const response= await axios.get(url,{auth:{username:username,password:password}});
                                return res.status(200).json({data:response.data})
